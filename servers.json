@@ -1,0 +1,416 @@
+[
+  {
+    "nome": "Tuga Army Retakes #1 (Only Mirage)",
+    "ip": "185.113.141.103",
+    "porta": 61001,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "Tuga Army Retakes #2 (Only Mirage)",
+    "ip": "185.113.141.103",
+    "porta": 61002,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "Tuga Army Retakes #3 (Only Mirage)",
+    "ip": "185.113.141.103",
+    "porta": 61003,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "Tuga Army Retakes #4 (Only Mirage)",
+    "ip": "185.113.141.103",
+    "porta": 61004,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "Tuga Army Retakes #5 (Only Mirage)",
+    "ip": "185.113.141.103",
+    "porta": 61005,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "Tuga Army Retakes #6 (Only Mirage)",
+    "ip": "185.113.141.103",
+    "porta": 61006,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "Tuga Army Retakes #7 (Only Mirage)",
+    "ip": "185.113.141.103",
+    "porta": 61007,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "Tuga Army Retakes #8 (Only Mirage)",
+    "ip": "185.113.141.103",
+    "porta": 61008,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "Tuga Army Retakes #9 (Only Mirage)",
+    "ip": "185.113.141.103",
+    "porta": 61009,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "Tuga Army Retakes #10 (Only Mirage)",
+    "ip": "185.113.141.103",
+    "porta": 61010,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "Tuga Army Retakes #1",
+    "ip": "185.113.141.103",
+    "porta": 61011,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "Tuga Army Retakes #2",
+    "ip": "185.113.141.103",
+    "porta": 61012,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "Tuga Army Retakes #3",
+    "ip": "185.113.141.103",
+    "porta": 61013,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "Tuga Army Retakes #4",
+    "ip": "185.113.141.103",
+    "porta": 61014,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "Tuga Army Retakes #5",
+    "ip": "185.113.141.103",
+    "porta": 61015,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "Tuga Army Retakes #6",
+    "ip": "185.113.141.103",
+    "porta": 61016,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "Tuga Army Retakes #7",
+    "ip": "185.113.141.103",
+    "porta": 61017,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "Tuga Army Retakes #8",
+    "ip": "185.113.141.103",
+    "porta": 61018,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "Tuga Army Retakes #9",
+    "ip": "185.113.141.103",
+    "porta": 61019,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "Tuga Army Retakes #10",
+    "ip": "185.113.141.103",
+    "porta": 61020,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "Tuga Army FFA #1",
+    "ip": "185.113.141.45",
+    "porta": 60021,
+    "tipo": "FFA"
+  },
+  {
+    "nome": "Tuga Army AWP #1",
+    "ip": "185.113.141.45",
+    "porta": 60022,
+    "tipo": "AWP"
+  },
+  {
+    "nome": "Tuga Army Arenas #1",
+    "ip": "185.113.141.45",
+    "porta": 60023,
+    "tipo": "Arenas"
+  },
+  {
+    "nome": "SweetRicers Retakes #1 (Only Mirage)",
+    "ip": "185.113.141.34",
+    "porta": 22101,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "SweetRicers Retakes #2 (Only Mirage)",
+    "ip": "185.113.141.34",
+    "porta": 22102,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "SweetRicers Retakes #3 (Only Mirage)",
+    "ip": "185.113.141.34",
+    "porta": 22103,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "SweetRicers Retakes #4 (Only Mirage)",
+    "ip": "185.113.141.34",
+    "porta": 22104,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "SweetRicers Retakes #5 (Only Inferno)",
+    "ip": "185.113.141.34",
+    "porta": 22105,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "SweetRicers Retakes #6 (Only Ancient)",
+    "ip": "185.113.141.34",
+    "porta": 22106,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "SweetRicers Surf Skill",
+    "ip": "135.125.98.130",
+    "porta": 22101,
+    "tipo": "Surf"
+  },
+  {
+    "nome": "SweetRicers Jailbreak",
+    "ip": "185.113.141.27",
+    "porta": 22100,
+    "tipo": "Jailbreak"
+  },
+  {
+    "nome": "SweetRicers FFA (Mirage Only)",
+    "ip": "185.113.141.27",
+    "porta": 22104,
+    "tipo": "FFA"
+  },
+  {
+    "nome": "SweetRicers Surf Combate",
+    "ip": "185.113.141.27",
+    "porta": 22106,
+    "tipo": "Surf"
+  },
+  {
+    "nome": "SweetRicers Retakes #8 (Only Dust2)",
+    "ip": "185.113.141.34",
+    "porta": 22108,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "SweetRicers Retakes #7 (Only Train)",
+    "ip": "185.113.141.34",
+    "porta": 22107,
+    "tipo": "Retakes"
+  },
+  {
+    "nome": "CyberShoke Jailbreak",
+    "ip": "157.90.1.110",
+    "porta": 27055,
+    "tipo": "Jailbreak"
+  },
+  {
+    "nome": "CyberShoke Arenas #35",
+    "ip": "45.143.199.231",
+    "porta": 28018,
+    "tipo": "Arenas"
+  },
+  {
+    "nome": "CyberShoke Arenas #15",
+    "ip": "5.9.66.207",
+    "porta": 27020,
+    "tipo": "Arenas"
+  },
+  {
+    "nome": "CyberShoke Arenas #36",
+    "ip": "45.143.199.231",
+    "porta": 28053,
+    "tipo": "Arenas"
+  },
+  {
+    "nome": "CyberShoke Arenas #14",  
+    "ip": "5.9.66.207",
+    "porta": 27019,
+    "tipo": "Arenas"
+  },
+  {
+    "nome": "CyberShoke Arenas #1",
+    "ip": "5.9.66.207",
+    "porta": 27057,
+    "tipo": "Arenas"
+  },
+  {
+    "nome": "CyberShoke Arenas #13",
+    "ip": "5.9.66.207",
+    "porta": 27018,
+    "tipo": "Arenas"
+  },
+  {
+    "nome": "CyberShoke Only Lego 2 #3",
+    "ip": "162.55.94.181",
+    "porta": 27044,
+    "tipo": "AWP"
+  },
+  {
+    "nome": "CyberShoke Only Lego 2 #2",
+    "ip": "162.55.94.181",
+    "porta": 27043,
+    "tipo": "AWP"
+  },
+  {
+    "nome": "CyberShoke Only Lego 2 #54",
+    "ip": "45.143.199.231",
+    "porta": 28019,
+    "tipo": "AWP"
+  },
+  {
+    "nome": "CyberShoke Only Lego 2 #49",
+    "ip": "217.182.199.30",
+    "porta": 28035,
+    "tipo": "AWP"
+  },
+  {
+    "nome": "CyberShoke Only Lego 2 #5",
+    "ip": "162.55.94.181",
+    "porta": 27046,
+    "tipo": "AWP"
+  },
+  {
+    "nome": "CyberShoke Only Lego 2 #4",
+    "ip": "162.55.94.181",
+    "porta": 27045,
+    "tipo": "AWP"
+  },
+  {
+    "nome": "CyberShoke Only Lego 2 Carton #40",
+    "ip": "162.55.2.53",
+    "porta": 27054,
+    "tipo": "AWP"
+  },
+  {
+    "nome": "CyberShoke Only Lego 2 Carton #38",
+    "ip": "162.55.2.53",
+    "porta": 27052,
+    "tipo": "AWP"
+  },
+  {
+    "nome": "CyberShoke Only Lego 2 Winter #1",
+    "ip": "162.55.94.181",
+    "porta": 27042,
+    "tipo": "AWP"
+  },
+  {
+    "nome": "CyberShoke Only Cannons KG #39",
+    "ip": "162.55.2.53",
+    "porta": 27053,
+    "tipo": "AWP"
+  },
+  {
+    "nome": "CyberShoke Only Bhop Rocket #30",
+    "ip": "162.55.2.53",
+    "porta": 27049,
+    "tipo": "AWP"
+  },
+  {
+    "nome": "CyberShoke Only Bhop Rocket #29",
+    "ip": "162.55.2.53",
+    "porta": 27048,
+    "tipo": "AWP"
+  },
+  {
+    "nome": "CyberShoke Bhop #91",
+    "ip": "45.143.199.231",
+    "porta": 28021,
+    "tipo": "Bhop"
+  },
+  {
+    "nome": "CyberShoke Bhop Hard #79",
+    "ip": "54.36.177.116",
+    "porta": 28018,
+    "tipo": "Bhop"
+  },
+  {
+    "nome": "CyberShoke Bhop Hard #80",
+    "ip": "54.36.177.116",
+    "porta": 28019,
+    "tipo": "Bhop"
+  },
+  {
+    "nome": "CyberShoke Only Boreas #89",
+    "ip": "5.9.148.239",
+    "porta": 28045,
+    "tipo": "Surf"
+  },
+  {
+    "nome": "CyberShoke Only NYX #90",
+    "ip": "5.9.148.239",
+    "porta": 28048,
+    "tipo": "Surf"
+  },
+  {
+    "nome": "CyberShoke Only Kitsune #22",
+    "ip": "162.55.94.181",
+    "porta": 27020,
+    "tipo": "Surf"
+  },
+  {
+    "nome": "CyberShoke Only Whiteout #16",
+    "ip": "23.88.73.61",
+    "porta": 27027,
+    "tipo": "Surf"
+  },
+  {
+    "nome": "CyberShoke Only Beginner #17",
+    "ip": "23.88.73.61",
+    "porta": 27028,
+    "tipo": "Surf"
+  },
+  {
+    "nome": "CyberShoke Surf #58",
+    "ip": "185.113.141.27",
+    "porta": 27057,
+    "tipo": "Surf"
+  },
+  {
+    "nome": "CyberShoke Surf #94",
+    "ip": "45.143.199.231",
+    "porta": 28046,
+    "tipo": "Surf"
+  },
+  {
+    "nome": "CyberShoke Surf #96",
+    "ip": "45.143.199.231",
+    "porta": 28049,
+    "tipo": "Surf"
+  },
+  {
+    "nome": "CyberShoke Duels Mirage #204",
+    "ip": "54.37.84.161",
+    "porta": 28021,
+    "tipo": "Duelos"
+  },
+  {
+    "nome": "CyberShoke Duels Mirage #203",
+    "ip": "54.37.84.161",
+    "porta": 28020,
+    "tipo": "Duelos"
+  },
+  {
+    "nome": "CyberShoke Duels Mirage #201",
+    "ip": "54.37.84.161",
+    "porta": 28019,
+    "tipo": "Duelos"
+  },
+  {
+    "nome": "CyberShoke Duels Mirage #201",
+    "ip": "54.37.84.161",
+    "porta": 28018,
+    "tipo": "Duelos"
+  }
+]

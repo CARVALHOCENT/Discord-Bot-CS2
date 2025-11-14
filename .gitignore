@@ -1,0 +1,9 @@
+# Ficheiro de Tokens e segredos
+.env
+
+# Ficheiros de sistema do Python
+__pycache__/
+*.pyc
+
+# Executável do FFmpeg
+ffmpeg.exe
