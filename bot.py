@@ -3,6 +3,7 @@ import a2s
 import json
 import asyncio
 import time
+import random
 from discord import app_commands
 from discord.ui import View, Button, Select
 import os
@@ -25,7 +26,12 @@ FACEIT_HEADERS = {
 
 # --- NOVO: Configuração de Som ---
 # Coloca o nome do teu ficheiro de som aqui. Tem de estar na mesma pasta do bot.
-SOUND_FILE_ADORO_TE = "adorote.mp3" 
+SOUND_FILES_POOL = [
+    "Baile_da_Rita.mp3",
+    "Pista_Pegando_Fogo.mp3",
+    "Rita_Os_Amigos.mp3",
+    "Top.mp3"
+]
 # -------------------------------
 
 # --- CLIENT ---
@@ -537,12 +543,10 @@ async def elodorei(interaction: discord.Interaction):
     hardcoded_nickname = "Bichoblamef"
     await check_faceit_stats(interaction, hardcoded_nickname)
 
-# --- NOVO COMANDO /veademo ---
-@tree.command(name="veademo", description="Mostra as stats da última partida de um jogador.")
-@app_commands.describe(nickname="O nick do jogador na Faceit")
-async def veademo(interaction: discord.Interaction, nickname: str):
-    await interaction.response.defer() # Resposta pública
-    print(f"\n--- Iniciando busca /veademo para: {nickname} ---")
+# --- FUNÇÃO DE LÓGICA PARA ÚLTIMA PARTIDA (Reutilizável) ---
+async def check_last_match_logic(interaction: discord.Interaction, nickname: str):
+    """Lógica para buscar e exibir a última partida de um jogador."""
+    print(f"\n--- Iniciando busca Last Match para: {nickname} ---")
 
     # 1. Obter ID do Jogador
     player_data = await get_faceit_player(nickname)
@@ -559,23 +563,22 @@ async def veademo(interaction: discord.Interaction, nickname: str):
     # 2. Obter Última Partida
     last_match = await get_last_match(player_id)
     if last_match == "TIMEOUT":
-        await interaction.followup.send("❌ A API da Faceit demorou muito (Timeout). Tenta novamente.")
+        await interaction.followup.send("❌ A API da Faceit demorou muito (Timeout).")
         return
     if not last_match:
         await interaction.followup.send(f"❌ '{nickname}' não tem histórico de partidas CS2.")
         return
 
     match_id = last_match.get('match_id')
-    # O link da partida está no objeto do histórico
     match_url = last_match.get('faceit_url', 'https://faceit.com').replace("{lang}", "en")
 
     # 3. Obter Stats da Partida
     stats_data = await get_match_stats(match_id)
     if stats_data == "TIMEOUT":
-        await interaction.followup.send("❌ A API da Faceit demorou muito (Timeout). Tenta novamente.")
+        await interaction.followup.send("❌ Timeout ao obter as stats da partida.")
         return
     if not stats_data or 'rounds' not in stats_data or not stats_data['rounds']:
-        await interaction.followup.send(f"❌ Não foi possível obter estatísticas para a partida: {match_id}")
+        await interaction.followup.send(f"❌ Não foi possível obter as stats da partida: {match_id}")
         return
 
     # 4. Analisar os Dados da Partida
@@ -588,7 +591,7 @@ async def veademo(interaction: discord.Interaction, nickname: str):
         team_won = False
 
         for team in round_data.get('teams', []):
-            if player_stats_obj: break # Se já encontrámos, paramos
+            if player_stats_obj: break
             for player in team.get('players', []):
                 if player.get('player_id') == player_id:
                     player_stats_obj = player.get('player_stats', {})
@@ -596,46 +599,55 @@ async def veademo(interaction: discord.Interaction, nickname: str):
                     break
         
         if not player_stats_obj:
-            await interaction.followup.send(f"❌ Não foi possível encontrar as stats do jogador '{nickname}' nessa partida.")
+            await interaction.followup.send(f"❌ Não encontrei as tuas stats nessa partida.")
             return
 
         # 5. Extrair Stats Finais
-        kills = player_stats_obj.get('Kills', 'N/A')
-        deaths = player_stats_obj.get('Deaths', 'N/A')
-        assists = player_stats_obj.get('Assists', 'N/A')
-        kd_ratio = player_stats_obj.get('K/D Ratio', 'N/A')
-        hs_percent = player_stats_obj.get('Headshots %', 'N/A')
-        mvps = player_stats_obj.get('MVPs', 'N/A')
+        kills = player_stats_obj.get('Kills', '0')
+        deaths = player_stats_obj.get('Deaths', '0')
+        assists = player_stats_obj.get('Assists', '0')
+        kd_ratio = player_stats_obj.get('K/D Ratio', '0')
+        hs_percent = player_stats_obj.get('Headshots %', '0')
+        mvps = player_stats_obj.get('MVPs', '0')
 
         embed_color = discord.Color.green() if team_won else discord.Color.red()
         result_text = "🏆 Vitória" if team_won else "💔 Derrota"
 
         # 6. Construir o Embed
-        embed = discord.Embed(
-            title=f"Última Partida de {nickname}",
-            color=embed_color,
-            url=match_url
-        )
+        embed = discord.Embed(title=f"Última Partida de {nickname}", color=embed_color, url=match_url)
         if avatar:
             embed.set_thumbnail(url=avatar)
         
-        embed.set_author(name=f"{result_text} em {map_name} ({score})", icon_url="https://files.catbox.moe/6v01M.png") # Icone Faceit
+        embed.set_author(name=f"{result_text} em {map_name} ({score})", icon_url="https://files.catbox.moe/6v01M.png")
         embed.add_field(name="Kills", value=f"**{kills}**", inline=True)
         embed.add_field(name="Deaths", value=f"**{deaths}**", inline=True)
         embed.add_field(name="Assists", value=f"**{assists}**", inline=True)
         embed.add_field(name="K/D", value=f"**{kd_ratio}**", inline=True)
         embed.add_field(name="Headshots", value=f"{hs_percent}%", inline=True)
         embed.add_field(name="MVPs", value=f"{mvps}", inline=True)
-        
         embed.add_field(name="🔗 Link da Partida", value=f"[Ver demo na Faceit]({match_url})", inline=False)
         embed.set_footer(text=f"Match ID: {match_id}")
 
         await interaction.followup.send(embed=embed)
-        print(f"--- Busca /veademo para {nickname} CONCLUÍDA ---")
+        print(f"--- Busca concluída para {nickname} ---")
     
     except Exception as e:
-        print(f"ERRO CRÍTICO ao analisar stats da partida {match_id}: {e}")
-        await interaction.followup.send("❌ Ocorreu um erro ao ler os dados desta partida. A API pode ter retornado um formato inesperado.")
+        print(f"ERRO: {e}")
+        await interaction.followup.send("❌ Erro ao ler os dados da partida.")
+
+# --- COMANDO /veademo (Agora simplificado) ---
+@tree.command(name="veademo", description="Mostra as stats da última partida de um jogador.")
+@app_commands.describe(nickname="O nick do jogador na Faceit")
+async def veademo(interaction: discord.Interaction, nickname: str):
+    await interaction.response.defer()
+    await check_last_match_logic(interaction, nickname)
+
+# --- NOVO COMANDO /lastgamedorei ---
+@tree.command(name="lastgamedorei", description="Verifica a última partida do BICHOREI (Bichoblamef).")
+async def lastgamedorei(interaction: discord.Interaction):
+    await interaction.response.defer()
+    # Nickname fixo do rei
+    await check_last_match_logic(interaction, "Bichoblamef")
 
 # ===================================================================
 # --- FIM DA SECÇÃO FACEIT ---
@@ -645,69 +657,59 @@ async def veademo(interaction: discord.Interaction, nickname: str):
 # --- NOVO: SECÇÃO DE VOZ (Toca 2x e Sai) ---
 # ===================================================================
 
-@tree.command(name="adoro-te", description="O bot entra na tua call para te dizer algo especial (2x).")
+@tree.command(name="adoro-te", description="O bot entra na call e toca uma música aleatória (2x).")
 async def adoro_te(interaction: discord.Interaction):
-    # 1. Verifica se o utilizador está numa call
+    # 1. Verifica call
     if interaction.user.voice is None:
-        await interaction.response.send_message("❌ Tens de estar numa call para eu entrar!", ephemeral=True)
+        await interaction.response.send_message("❌ Tens de estar numa call!", ephemeral=True)
         return
 
-    # 2. Verifica se o ficheiro de som existe
-    if not os.path.exists(SOUND_FILE_ADORO_TE):
-        print(f"❌ ERRO: Ficheiro de som '{SOUND_FILE_ADORO_TE}' não foi encontrado.")
-        await interaction.response.send_message("❌ Desculpa, não consigo encontrar o meu ficheiro de som.", ephemeral=True)
+    # 2. ESCOLHA ALEATÓRIA
+    som_escolhido = random.choice(SOUND_FILES_POOL)
+    
+    # 3. Verifica se o ficheiro existe
+    if not os.path.exists(som_escolhido):
+        await interaction.response.send_message(f"❌ Erro: Ficheiro {som_escolhido} não encontrado.", ephemeral=True)
         return
         
-    # 3. Entra na call do utilizador
+    # 4. Ligar à call
     channel = interaction.user.voice.channel
     voice_client = interaction.guild.voice_client 
 
     try:
         if voice_client is not None:
-            # Se já está na call, move-se
             await voice_client.move_to(channel)
         else:
-            # Se não está, liga-se
             voice_client = await channel.connect()
     except Exception as e:
-        print(f"Erro ao ligar ou mover: {e}")
-        await interaction.response.send_message("❌ Não consigo ligar-me a esse canal de voz.", ephemeral=True)
+        await interaction.response.send_message("❌ Erro ao ligar ao canal.", ephemeral=True)
         return
 
-    # 4. Lógica para tocar 2x e sair
-    
-    # Variável para contar quantas vezes tocou
+    # 5. Lógica de tocar 2x
     play_count = 0
 
     def after_play_callback(error):
-        """Esta função é chamada automaticamente quando um som termina."""
-        nonlocal play_count # Diz à função para usar a variável 'play_count' de fora
+        nonlocal play_count
         play_count += 1
         
         if error:
-            print(f"Erro ao tocar o som: {error}")
-            # Se deu erro, não faz mais nada
+            print(f"Erro: {error}")
             return
 
         if play_count == 1:
-            # Se tocou 1 vez, toca a segunda vez
-            print("DEBUG: Som tocou 1 vez. A tocar a 2ª vez.")
-            source_again = discord.FFmpegPCMAudio(SOUND_FILE_ADORO_TE)
+            # Toca o MESMO som escolhido na 2ª vez
+            source_again = discord.FFmpegPCMAudio(som_escolhido)
             voice_client.play(source_again, after=after_play_callback)
         
-        elif play_count == 2:
-            # Se tocou 2 vezes, desconecta-se
-            print("DEBUG: Som tocou 2 vezes. A desconectar.")
-            # Como estamos num 'callback' (sync), não podemos usar 'await'.
-            # Usamos 'run_coroutine_threadsafe' para pedir ao bot para se desconectar.
+        elif play_count == 1:
             asyncio.run_coroutine_threadsafe(voice_client.disconnect(), client.loop)
 
-    # Inicia a *primeira* vez
-    print("DEBUG: A tocar a 1ª vez.")
-    source_first = discord.FFmpegPCMAudio(SOUND_FILE_ADORO_TE)
+    # Inicia a 1ª vez
+    source_first = discord.FFmpegPCMAudio(som_escolhido)
     voice_client.play(source_first, after=after_play_callback)
 
-    await interaction.response.send_message("💖 A tocar... (2x)", ephemeral=True) # Resposta simples
+    # Mensagem personalizada com o nome da música (opcional)
+    await interaction.response.send_message(f"🎵 A tocar: **{som_escolhido}**", ephemeral=True)
 
 
 @tree.command(name="para", description="Faz o bot parar de tocar e sair da call.")
@@ -734,7 +736,7 @@ async def on_ready():
     
     print(f"✅ Bot logado como {client.user}")
     print("📡 Comandos sincronizados globalmente.")
-    print("💬 Usa /mimiajuda, /checkmyelo, /elodorei, /veademo, /adoro-te, ou /para.") # --- ESTA É A LINHA CORRETA ---
+    print("💬 Usa /mimiajuda, /checkmyelo, /elodorei, /veademo, /lastgamedorei, /adoro-te, ou /para.") # --- ESTA É A LINHA CORRETA ---
 
 
 # --- EXECUÇÃO (Com verificação de Token) ---
